@@ -19,16 +19,17 @@ public class RedisConfig {
     }
 
     @Bean
-    public RedisClient redisClient(){
+    public RedisClient redisClient() {
 
         RedisURI.Builder redisUriBuilder = RedisURI.builder();
 
-        redisUriBuilder
-                .withHost(preference.redisHostname)
-                .withPort(Integer.parseInt(preference.redisPort))
-                .withPassword(preference.redisPassword.toCharArray())
-                .withDatabase(StringUtils.isBlank(preference.redisDatabaseIndex) ? 0 : Integer.parseInt(preference.redisDatabaseIndex));
-
-        return RedisClient.create(redisUriBuilder.build());
+        return RedisClient.create(
+                redisUriBuilder
+                        .withHost(preference.redisHostname)
+                        .withPort(Integer.parseInt(preference.redisPort))
+                        .withPassword(preference.redisPassword.toCharArray())
+                        .withDatabase(StringUtils.isBlank(preference.redisDatabaseIndex) ? 0 : Integer.parseInt(preference.redisDatabaseIndex))
+                        .build()
+        );
     }
 }
